@@ -5,16 +5,42 @@ import { parse } from "https://deno.land/std@0.221.0/dotenv/mod.ts";
 const dotenv = await Deno.readTextFile(".env");
 const bot = new Bot(parse(dotenv).TOKEN);
 
-// Bot commands and behaviour
-bot.command("start", (ctx: Context) => ctx.reply(
-	"Welcome to the bot!\
-\nYou seeing this message is a sign of dev being a lazy fuck. Go and bully him"
-));
-bot.command("die", (ctx: Context) => ctx.replyWithDice("🎲"));
+// Bot command description
+const commands = [
+	// { command: "", description: "" },
+	{ command: "start", description: "start the bot." },
+	{ command: "help", description: "print this help message." },
+	{ command: "die", description: "roll a die." },
+];
+await bot.api.setMyCommands(commands);
+
+function commandsToString(commands: { command: string, description: string }[]) {
+	let result: string = "";
+	for (let command of commands)
+		result += `/${command.command} - ${command.description}\n`;
+	return result;
+}
+
+// Bot actions
+bot.command("help", (ctx: Context) => ctx.reply(commandsToString(commands)))
+
+bot.command("start", (ctx: Context) => ctx.reply(`
+Welcome to the bot!
+Try /help to get the list of commands!
+`));
+
+bot.command("die", (ctx: Context) => {
+	const emoji = ctx.match ? ctx.match : "🎲";
+	if (["🎲", "🎯", "🏀", "⚽", "🎰"].includes(emoji))
+		ctx.replyWithDice(emoji);
+	else
+		ctx.reply(emoji + " isn't supported.");
+});
+	
 bot.on("message", (ctx: Context) => {
 	const tosynitus = 6011187837;
-	const coolRaven = "https://wallpaperboat.com/wp-content/uploads/2020/10/16/56991/\
-raven-08.jpg";
+	const coolRaven =
+		"https://wallpaperboat.com/wp-content/uploads/2020/10/16/56991/raven-08.jpg";
 	if (ctx.from?.id === tosynitus) ctx.replyWithPhoto(coolRaven);
 });
 
