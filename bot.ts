@@ -2,8 +2,11 @@ import { Bot, Context } from "https://deno.land/x/grammy@v1.22.4/mod.ts";
 import { parse } from "jsr:@std/dotenv@0.222.1";
 
 // Create an instance of the `Bot` class and pass your bot token to it.
-const dotenv = await Deno.readTextFile(".env");
-const bot = new Bot(parse(dotenv).TOKEN);
+const token = await Deno.readTextFile(".env")
+	.then((dotenv) => parse(dotenv).TOKEN)
+	.catch((_) => Deno.env.get("TOKEN"));
+
+const bot = new Bot(token ? token : "");
 
 // Bot command description
 const commands = [
