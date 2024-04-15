@@ -1,5 +1,5 @@
 import { Bot, Context } from "https://deno.land/x/grammy@v1.22.4/mod.ts";
-import { parse } from "https://deno.land/std@0.221.0/dotenv/mod.ts";
+import { parse } from "jsr:@std/dotenv@0.222.1";
 
 // Create an instance of the `Bot` class and pass your bot token to it.
 const dotenv = await Deno.readTextFile(".env");
@@ -16,7 +16,7 @@ await bot.api.setMyCommands(commands);
 
 function commandsToString(commands: { command: string, description: string }[]) {
 	let result: string = "";
-	for (let command of commands)
+	for (const command of commands)
 		result += `/${command.command} - ${command.description}\n`;
 	return result;
 }
@@ -30,7 +30,7 @@ Try /help to get the list of commands!
 `));
 
 bot.command("die", (ctx: Context) => {
-	const emoji = ctx.match ? ctx.match : "🎲";
+	const emoji = ctx.match ? ctx.match+"" : "🎲"; // +"" turns it into a string
 	if (["🎲", "🎯", "🏀", "⚽", "🎰"].includes(emoji))
 		ctx.replyWithDice(emoji);
 	else
@@ -44,5 +44,5 @@ bot.on("message", (ctx: Context) => {
 	if (ctx.from?.id === tosynitus) ctx.replyWithPhoto(coolRaven);
 });
 
-// Start the bot.
-bot.start();
+// Export bot for use with mod.ts
+export { bot };
