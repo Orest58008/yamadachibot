@@ -5,8 +5,13 @@ import { parse } from "jsr:@std/dotenv@0.222.1";
 const token = await Deno.readTextFile(".env")
 	.then((dotenv) => parse(dotenv).TOKEN)
 	.catch((_) => Deno.env.get("TOKEN"));
-console.log(`Creating bot with TOKEN ${token}`);
-const bot = new Bot(token ? token : "");
+
+console.log(`Creating bot with TOKEN=${token}`);
+const bot = new Bot(token ? token : "", {
+	client: {
+		canUseWebhookReply: (method) => method === "sendChatAction",
+	}
+});
 
 // Bot command description
 const commands = [
