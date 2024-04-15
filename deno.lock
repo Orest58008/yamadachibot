@@ -13,7 +13,6 @@
       "jsr:@std/cli@^0.222.1": "jsr:@std/cli@0.222.1",
       "jsr:@std/crypto@0.218": "jsr:@std/crypto@0.218.2",
       "jsr:@std/dotenv@0.222.1": "jsr:@std/dotenv@0.222.1",
-      "jsr:@std/dotenv@^0.221.0": "jsr:@std/dotenv@0.221.0",
       "jsr:@std/encoding@0.218": "jsr:@std/encoding@0.218.2",
       "jsr:@std/encoding@^0.218.2": "jsr:@std/encoding@0.218.2",
       "jsr:@std/encoding@^0.222.1": "jsr:@std/encoding@0.222.1",
@@ -68,9 +67,6 @@
           "jsr:@std/assert@^0.218.2",
           "jsr:@std/encoding@^0.218.2"
         ]
-      },
-      "@std/dotenv@0.221.0": {
-        "integrity": "60358ec8a55ff177ca000e5028d8e995b4f1380a90d5a83f087acf0d729cc817"
       },
       "@std/dotenv@0.222.1": {
         "integrity": "61c75269cfd569033d580d9341597eb1cd4b2796323c5823033bb6d60c66d619"
@@ -185,10 +181,5 @@
     "https://deno.land/x/grammy_types@v3.6.2/payment.ts": "d23e9038c5b479b606e620dd84e3e67b6642ada110a962f2d5b5286e99ec7de5",
     "https://deno.land/x/grammy_types@v3.6.2/settings.ts": "5e989f5bd6c587d55673bd8052293869aa2f372e9223dd7f6e28632bfe021b6e",
     "https://deno.land/x/grammy_types@v3.6.2/update.ts": "cfacb5558cd7d50fb90076abc16102a52e435ab88b2991c698e48928e515b50e"
-  },
-  "workspace": {
-    "dependencies": [
-      "jsr:@std/dotenv@^0.221.0"
-    ]
   }
 }
