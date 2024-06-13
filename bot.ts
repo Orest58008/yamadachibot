@@ -50,14 +50,16 @@ bot.command("die", (ctx: Context) => {
 });
 
 bot.command("gamble", (ctx: Context) => {
-    const times = ctx.match ? +ctx.match : 1;
+    let times = ctx.match ? +ctx.match : 1;
     let sum = 0;
     for (let i = 0; i < times; i++) {
-        const result = ctx.replyWithDice("🎲");
-        result.then(res => sum += res.dice.value);
+        const result = ctx.replyWithDice("🎰");
+        result.then(res => {
+            sum += res.dice.value; times -= 1;
+            if (times == 0)
+                ctx.reply("Your result is " + sum);
+        });
     }
-
-    ctx.reply("Your result: " + sum);
 });
 
 bot.on("message", (ctx: Context) => {
