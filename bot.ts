@@ -53,7 +53,7 @@ bot.command("gamble", (ctx: Context) => {
     const times = ctx.match ? +ctx.match : 1;
     let sum = 0;
     for (let i = 0; i < times; i++) {
-        const result = ctx.replyWithDice("🎰");
+        const result = ctx.replyWithDice("🎲");
         result.then(res => sum += res.dice.value);
     }
 
