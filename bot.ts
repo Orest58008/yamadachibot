@@ -30,7 +30,7 @@ function commandsToString(commands: { command: string, description: string }[]) 
 }
 
 // Bot actions
-bot.command("help", (ctx: Context) => ctx.reply(commandsToString(commands)))
+bot.command("help", (ctx: Context) => ctx.reply(commandsToString(commands)));
 
 bot.command("start", (ctx: Context) => ctx.reply(`
 Welcome to the bot!
